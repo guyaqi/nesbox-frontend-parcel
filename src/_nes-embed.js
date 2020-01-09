@@ -1,3 +1,5 @@
+import jsnes from "jsnes"
+
 const SCREEN_WIDTH = 256;
 const SCREEN_HEIGHT = 240;
 const FRAMEBUFFER_SIZE = SCREEN_WIDTH*SCREEN_HEIGHT;

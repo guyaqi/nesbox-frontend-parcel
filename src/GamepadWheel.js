@@ -1,6 +1,6 @@
 import React from 'react'
 
-import eCore from './Emulator'
+import eCore from './Emulator.ts'
 
 const blockStyle = {
     width: 120,

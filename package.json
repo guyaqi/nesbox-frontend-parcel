@@ -10,6 +10,7 @@
     "build": "parcel build index.html --public-url ./"
   },
   "dependencies": {
+    "jsnes": "^1.1.0",
     "parcel-bundler": "^1.12.4",
     "react": "^16.0.0",
     "react-dom": "^16.12.0"

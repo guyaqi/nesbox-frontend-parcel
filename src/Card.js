@@ -1,6 +1,5 @@
 import React from 'react'
-import ajaxGet from './util'
-import eCore from './Emulator'
+import eCore from './Emulator.ts'
 
 const boxShadow = {
     boxShadow: '0 0 7px #888888'
@@ -22,11 +21,13 @@ export class Card extends React.Component {
 
     componentDidMount() {
         const self = this
-        ajaxGet(self.props.desc, function(data) {
-            self.setState({
-                desc: data
+        fetch(self.props.desc)
+            .then(res => res.text())
+            .then(res => {
+                self.setState({
+                    desc: res
+                })
             })
-        })
     }
 
     render() {
@@ -56,30 +57,32 @@ export default class CardList extends React.Component {
 
     componentDidMount() {
         let self = this
-        ajaxGet('/api/nesbox-games',function(data) {
-            let gamelist = JSON.parse(data)
-            let mount = document.getElementById('list-games')
-            let alist = []
-            for(let game of gamelist.list) {
-                let gamePath = game
-                gamePath = '/nesbox-games/' + gamePath
-                // console.warn(gamePath)
-                let col = (
-                    <div className='col-lg-3 col-md-4 col-sm-6 mb-4 px-4' key={alist.length}>
-                        <Card
-                            shot={gamePath + '/' + "shot.png"}
-                            desc={gamePath + '/' + "desc.txt"}
-                            game={gamePath + '/' + "game.nes"}
-                            action = {()=>{
-                                eCore.nes_load_url('game', gamePath + '/' + "game.nes")
-                            }}
-                        />
-                    </div>
-                )
-                alist.push(col)
-            }
-            self.setState({allCard: alist})
-        })
+        fetch('/api/nesbox-games')
+            .then(res => res.json())
+            .then(res => {
+                let gamelist = res
+                let mount = document.getElementById('list-games')
+                let alist = []
+                for(let game of gamelist.list) {
+                    let gamePath = game
+                    gamePath = '/nesbox-games/' + gamePath
+                    // console.warn(gamePath)
+                    let col = (
+                        <div className='col-lg-3 col-md-4 col-sm-6 mb-4 px-4' key={alist.length}>
+                            <Card
+                                shot={gamePath + '/' + "shot.png"}
+                                desc={gamePath + '/' + "desc.txt"}
+                                game={gamePath + '/' + "game.nes"}
+                                action = {()=>{
+                                    eCore.nes_load_url('game', gamePath + '/' + "game.nes")
+                                }}
+                            />
+                        </div>
+                    )
+                    alist.push(col)
+                }
+                self.setState({allCard: alist})
+            })
     }
 
     render() {

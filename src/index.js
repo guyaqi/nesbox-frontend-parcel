@@ -1,6 +1,6 @@
 import fitInParent from './screen.ts'
 import keyCodes from './keyCode.ts'
-import eCore,{SCREEN_HEIGHT, SCREEN_WIDTH} from './Emulator'
+import eCore,{SCREEN_HEIGHT, SCREEN_WIDTH} from './Emulator.ts'
 
 import CardList from './Card'
 import GamepadWheel from './GamepadWheel'

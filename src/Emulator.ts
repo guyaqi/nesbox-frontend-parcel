@@ -1,4 +1,4 @@
-// import jsnes from '@bfirsh/jsnes'
+import jsnes from "jsnes"
 
 export const SCREEN_WIDTH = 256;
 export const SCREEN_HEIGHT = 240;
@@ -7,6 +7,7 @@ const FRAMEBUFFER_SIZE = SCREEN_WIDTH*SCREEN_HEIGHT;
 const AUDIO_BUFFERING = 512;
 const SAMPLE_COUNT = 4*1024;
 const SAMPLE_MASK = SAMPLE_COUNT - 1;
+
 
 export class EmulatorCore {
 
@@ -261,4 +262,5 @@ export class EmulatorCore {
 }
 
 let eCore = new EmulatorCore()
+
 export default eCore
