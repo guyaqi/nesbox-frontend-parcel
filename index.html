@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NES Box - online NES emulator</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="https://unpkg.com/jsnes/dist/jsnes.min.js"></script>
+    <link rel="stylesheet" href="./res/styles/index.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top align-items-baseline py-1" style="background: white;box-shadow: 0 1px 3px #888888;">
+        <a class="navbar-brand text-linear" href="#"><b>NES Box</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Games
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" id="action-upload" href="#">Open File...</a>
+                        <input type="file" id="openfile" style="display: none;" accept=".nes">
+                        <div class="dropdown-divider"></div>
+                        <a id="action-close" class="dropdown-item disabled" href="#">Close(Disabled)</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" id="a_setkey" data-toggle="modal" data-target="#exampleModal">Key</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">About</a>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Stay tuned" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 disabled" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Key Setting</h5>
+                
+            </div>
+            <div class="modal-body">
+                <table class="table table-sm table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Key</th>
+                            <th>Player 1</th>
+                            <th>Player 2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <th>Up</th>
+                            <th><button class="btn btn-sm switch-key" data-player="1" data-key="4">w</button></th>
+                            <th><button class="btn btn-sm switch-key" data-player="2" data-key="4">up arrow</button></th>
+                        </tr>
+                        <tr class="table-row">
+                            <th>Down</th>
+                            <th><button class="btn btn-sm switch-key" data-player="1" data-key="5">s</button></th>
+                            <th><button class="btn btn-sm switch-key" data-player="2" data-key="5">down arrow</button></th>
+                        </tr>
+                        <tr class="table-row">
+                            <th>Left</th>
+                            <th><button class="btn btn-sm switch-key" data-player="1" data-key="6">a</button></th>
+                            <th><button class="btn btn-sm switch-key" data-player="2" data-key="6">left arrow</button></th>
+                        </tr>
+                        <tr class="table-row">
+                            <th>Right</th>
+                            <th><button class="btn btn-sm switch-key" data-player="1" data-key="7">d</button></th>
+                            <th><button class="btn btn-sm switch-key" data-player="2" data-key="7">right arrow</button></th>
+                        </tr>
+                        <tr class="table-row">
+                            <th>B</th>
+                            <th><button class="btn btn-sm switch-key" data-player="1" data-key="1">j</button></th>
+                            <th><button class="btn btn-sm switch-key" data-player="2" data-key="1">numpad 1</button></th>
+                        </tr>
+                        <tr class="table-row">
+                            <th>A</th>
+                            <th><button class="btn btn-sm switch-key" data-player="1" data-key="0">k</button></th>
+                            <th><button class="btn btn-sm switch-key" data-player="2" data-key="0">numpad 2</button></th>
+                        </tr>
+                        <tr class="table-row">
+                            <th>Select</th>
+                            <th><button class="btn btn-sm switch-key" data-player="1" data-key="2">1</button></th>
+                            <th><button class="btn btn-sm switch-key" data-player="2" data-key="2">multiply</button></th>
+                        </tr>
+                        <tr class="table-row">
+                            <th>Start</th>
+                            <th><button class="btn btn-sm switch-key" data-player="1" data-key="3">2</button></th>
+                            <th><button class="btn btn-sm switch-key" data-player="2" data-key="3">subtract</button></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info btn-sm" id="btn_resetkey">&nbsp;&nbsp;Default&nbsp;&nbsp;</button>
+                <button class="btn btn-success btn-sm" id="btn_setkey" data-dismiss="modal">&nbsp;&nbsp;OK&nbsp;&nbsp;</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal text-center" id="fullScreenModal" tabindex="-1" role="dialog" style="overflow-y: hidden;">
+        
+        <a href="#" class="text-light" data-dismiss="modal" data-target="#fullScreenModal"
+            style="position:absolute;top:0;left:0;z-index: 10003;" id="action-quitFullscreen">
+            <div class="float-left px-3 py-1 bg-dark">← Back</div>
+        </a>
+        <a href="#" class="text-light"
+            style="position:absolute;top:0;right:0;z-index: 10003;" id="action-togglePad">
+            <div class="float-left px-3 py-1 bg-dark">Gamepad</div>
+        </a>
+        <div id="fullscreenMask" style="width:100%;background:black;position:absolute;top:-300px;left:-300px;z-index: -1;"></div>
+        <canvas id="fullscreenGame" width="256" height="240" style="z-index: 10001"></canvas>
+        <div id="gamepadLayer" class="p-3" style="position:absolute;bottom:0;width:100%;height: 200px;opacity:0.4;display: none;user-select: none;">
+            <div id='gamepadWheel'></div>
+            
+            <table style="margin:0 auto">
+                <tr>
+                    <td><span class="gamepad" data-key="2">SE</span></td>
+                    <td><span class="gamepad" data-key="3">ST</span></td>
+                </tr>
+            </table>
+            <table style="position:absolute;bottom:10px;right:10px">
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><span class="gamepad" data-key="0">A</span></td>
+                </tr>
+                <tr>
+                    <td><span class="gamepad" data-key="1">B</span></td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="container py-2 my-3 text-center">
+        <div class="row">
+            <div class="col">
+                <div id="gamePanel">
+                    <canvas id="game" width="256" height="240"></canvas>
+                    <div id="gameTool" class="d-flex">
+                        <button id="action-fullscreen" class="btn btn-success" data-toggle="modal" data-target="#fullScreenModal">Full Screen</button>
+                        <button id="action-reset" class="btn btn-warning mx-1" onclick="nes.stop()">Reset</button>
+                    </div>
+                </div>
+                <p id="testP" class="p-2">NES Emulator</p>
+                
+            </div>
+        </div>
+
+        <div id="testDiv" class="row"></div>
+    </div>
+
+    <div id='gameList'></div>
+    
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Games</h1>
+                <hr />
+            </div>
+        </div>
+        <div id="list-games" class="row">
+
+        </div>
+    </div> -->
+
+    
+    <div class="container text-center text-muted">
+        <div class="row">
+            <div class="col">
+                <hr/>
+                <p><smal>Copyright © 2019 Guyaqi All Rights Reserved.</smal></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="./main.ts"></script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+
+body {
+    /* background: linear-gradient(rgb(255, 234, 207),aliceblue) no-repeat; */
+}
+
+canvas#game {
+    background: black;
+    image-rendering: pixelated;
+}
+
+canvas#fullscreenGame {
+    background: black;
+    image-rendering: pixelated;
+}
+
+@media all and (max-width: 599px) {
+    div#gamePanel {
+        max-width: 100%;
+    }
+}
+@media all and (min-width: 600px) {
+    div#gamePanel {
+        width: 600px;
+    }
+}
+
+div#gamePanel {
+    padding: 20px;
+    margin:0 auto;
+
+    background: linear-gradient(aliceblue,rgb(192, 219, 228)) no-repeat;
+
+    border-radius: .25rem;
+    border: 1px solid rgba(0,0,0,.125);
+    box-shadow: 0 0 7px #888888;
+  
+}
+
+.gamepad {
+    border-radius: 5px;
+    background: grey;
+    padding: 10px;
+    margin: 10px;
+}
+
+.text-linear {
+    background: -webkit-linear-gradient(top,white, red);
+    
+    background-clip: content-box;
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
